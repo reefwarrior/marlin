@@ -1,0 +1,16 @@
+G29 determines the shape of the bed by probing the bed. This will set the shape of the bed with respect to the sensor trigger point. 
+The z-offset (set by M851 Z-x.xx is needed to set the offset between the nozzle and the sensor trigger point (to the bed).
+
+The sequence to determine the offset is:
+
+M851 Z0; // Set the Z offset to zero height
+G28;     // Home Z in the middle of the bed
+G1 Z0;   // This will move the head to zero height;
+M211 S0; // This will disable the end stops so that you 
+         // will be able to proceed lower than Z=0
+Now adjust Z height to fit a piece of paper and note the negative Z height (either through the LCD or through an application over USB)
+
+M851 Z-1.23; // Define the Z offset
+M500;        // Store the settings
+M211 S1;     // Enable the end stops again
+Please note that -1.23 is a fictive value that should be replaced by your own value.
